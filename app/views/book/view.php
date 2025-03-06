@@ -33,7 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
             'description:ntext',
             'isbn',
-            'cover',
+            [
+                'attribute' => 'cover',
+                'format' => 'html',
+                'value' => function($model) {
+                    if (!$model->cover) {
+                        return 'Нет изображения';
+                    }
+                    return Html::img(
+                        Yii::getAlias('@coversUrl') . '/' . $model->cover, 
+                        ['width' => '150', 'alt' => $model->title]
+                    );
+                },
+            ],
             'created_at',
             'updated_at',
             [

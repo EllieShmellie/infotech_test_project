@@ -9,14 +9,8 @@ use yii\web\NotFoundHttpException;
 
 class AuthorService
 {
-    /**
-     * @var AuthorRepository
-     */
-    protected $repository;
-
-    public function __construct(AuthorRepository $repository)
+    public function __construct(private AuthorRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function create(Author $model): void
@@ -61,5 +55,9 @@ class AuthorService
     public function getTopAuthors(int $year, int $limit = 10): array
     {
         return $this->repository->getTopAuthors($year, $limit);
+    }
+
+    public function getAuthors(): array{
+        return $this->repository->getAuthors();
     }
 }

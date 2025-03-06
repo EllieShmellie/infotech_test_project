@@ -37,5 +37,13 @@ class AuthorRepository
             ->limit($limit)
             ->all();
     }
+
+    /**
+     * @return Author[]
+     */
+    public function getAuthors(): array
+    {
+        return Author::find()->all();
+    }
     
 }

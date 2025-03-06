@@ -1,3 +1,4 @@
 <?php
 
-// Yii::$app->container->set();
+Yii::setAlias('@covers', dirname(__DIR__) . '/web/images/covers');
+Yii::setAlias('@coversUrl',  '/images/covers');

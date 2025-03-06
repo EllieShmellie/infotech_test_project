@@ -14,7 +14,10 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'name' => 'Тест',
+        'smsPilot' => [
+            'class' => 'app\components\SmsPilot',
+            'apiKey' => $params['smsPilotApiKey'], 
+        ],
         'request' => [
             'cookieValidationKey' => 'yL5fRLYzkVeL_7h0CumcJ5Xp2Rvt5j09',
         ],

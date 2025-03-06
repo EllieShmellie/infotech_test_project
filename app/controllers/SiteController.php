@@ -14,19 +14,13 @@ use yii\web\Response;
 class SiteController extends Controller
 {
     /**
-     * @var UserService
-     */
-    private $userService;
-
-    /**
      * @param string $id
      * @param \yii\base\Module $module
      * @param UserService $userService
      * @param array $config
      */
-    public function __construct($id, $module, UserService $userService, $config = [])
+    public function __construct($id, $module, private UserService $userService, $config = [])
     {
-        $this->userService = $userService;
         parent::__construct($id, $module, $config);
     }
 

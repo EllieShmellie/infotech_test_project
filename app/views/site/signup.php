@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use borales\extensions\phoneInput\PhoneInput;
 
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,15 +16,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'form-signup',
     ]); ?>
 
-        <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->widget(PhoneInput::class, [
+        'jsOptions' => [
+            'preferredCountries' => ['ru'],
+        ]
+    ]); ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'password')->passwordInput() ?>
 
-        <?= $form->field($model, 'password_repeat')->passwordInput() ?>
+    <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
-        <div class="form-group">
-            <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-        </div>
+    <div class="form-group">
+        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 </div>

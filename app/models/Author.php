@@ -68,6 +68,29 @@ class Author extends ActiveRecord
     }
 
     /**
+     * @inheritDoc
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'author_id' => 'ID Автора', 
+            'last_name' => 'Фамилия',
+            'first_name' => 'Имя',
+            'patronymic' => 'Отчество',
+            'updated_at' => 'Обновлен',
+            'created_at' => 'Создан',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullname(): string
+    {
+        return "{$this->last_name} {$this->first_name} {$this->patronymic}";
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getAuthorBooks(): ActiveQuery

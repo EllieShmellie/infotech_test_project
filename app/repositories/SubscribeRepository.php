@@ -32,4 +32,12 @@ class SubscribeRepository
         }
         return $subscription;
     }
+
+    /**
+     * @param int[] $author_id
+     * @return array|Subscriber[]
+     */
+    public function findSubscribersByAuthors(array $authorIds): array{
+        return Subscriber::find()->where(['author_id'=> $authorIds])->all();
+    }
 }

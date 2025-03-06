@@ -7,6 +7,7 @@
 
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
+use borales\extensions\phoneInput\PhoneInput;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'phone')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'phone')->widget(PhoneInput::class, [
+                'jsOptions' => [
+                    'preferredCountries' => ['ru'],
+                ]
+            ]); ?>
 
             <?= $form->field($model, 'password')->passwordInput() ?>
 

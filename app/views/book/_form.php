@@ -1,14 +1,16 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model app\models\Book */
+/* @var $authors app\models\Author[] */
 /* @var $form yii\widgets\ActiveForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\Author;
 
-$authorsList = ArrayHelper::map(Author::find()->all(), 'author_id', 'last_name');
+$authorsList = ArrayHelper::map($authors, 'author_id', 'last_name');
+$model->author_ids = ArrayHelper::getColumn($model->authors, 'author_id');
+
 ?>
 
 <div class="book-form">
@@ -23,11 +25,10 @@ $authorsList = ArrayHelper::map(Author::find()->all(), 'author_id', 'last_name')
     
     <?= $form->field($model, 'isbn')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cover_file')->fileInput() ?>
     
     <?= $form->field($model, 'author_ids')->listBox($authorsList, [
         'multiple' => true,
-        'size'     => 10,
     ]) ?>
 
     <div class="form-group">

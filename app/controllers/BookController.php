@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Book;
 use app\services\BookService;
+use app\services\AuthorService;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -43,7 +44,7 @@ class BookController extends Controller
         ];
     }
 
-    public function __construct($id, $module, private BookService $service, $config = [])
+    public function __construct($id, $module, private BookService $service, private AuthorService $authorSerivce, $config = [])
     {
         parent::__construct($id, $module, $config);
     }
@@ -71,7 +72,8 @@ class BookController extends Controller
     public function actionCreate(): Response|string
     {
         $model = new Book();
-        
+        $authors = $this->authorSerivce->getAuthors();
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             try {
                 $this->service->create($model);
@@ -83,12 +85,14 @@ class BookController extends Controller
         
         return $this->render('create', [
             'model' => $model,
+            'authors' => $authors,
         ]);
     }
 
     public function actionUpdate($id): Response|string
     {
         $model = $this->service->findModel($id);
+        $authors = $this->authorSerivce->getAuthors();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             try {
@@ -101,6 +105,7 @@ class BookController extends Controller
         
         return $this->render('update', [
             'model' => $model,
+            'authors' => $authors,
         ]);
     }
 

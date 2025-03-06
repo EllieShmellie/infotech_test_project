@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model app\models\Book */
+/* @var $authors app\models\Author[] */
 
 use yii\helpers\Html;
 
@@ -13,6 +14,6 @@ $this->params['breadcrumbs'][] = 'Изменить';
 
     <h1><?= Html::encode($this->title) ?></h1>
     
-    <?= $this->render('_form', ['model' => $model]) ?>
+    <?= $this->render('_form', ['model' => $model, 'authors' => $authors]) ?>
     
 </div>

@@ -9,11 +9,8 @@ use yii\web\BadRequestHttpException;
 
 class UserService
 {
-    private UserRepository $repository;
-
-    public function __construct(UserRepository $repository)
+    public function __construct(private UserRepository $repository)
     {
-        $this->repository = $repository;
     }
     
     /**

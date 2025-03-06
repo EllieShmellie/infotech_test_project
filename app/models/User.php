@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * @property int $user_id
@@ -29,7 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['phone', 'password_hash', 'auth_key'], 'required'],
-            [['phone'], 'string', 'max' => 20],
+            [['phone'], PhoneInputValidator::class, 'region' => ['RU']],
             [['password_hash', 'auth_key'], 'string', 'max' => 255],
             [['phone'], 'unique'],
         ];

@@ -12,15 +12,8 @@ services:
     depends_on:
       - db
     user: "${UID:-1000}:${GID:-1000}"
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=testdb
-      - DB_USER=root
-      - DB_PASSWORD=secret
-      - ALLOWED_DOMAIN=example.com
-      - TZ='Europe/Moscow'
-      - PHP_IDE_CONFIG=serverName=Docker
+    env_file:
+      - ./app/.env
     extra_hosts:
       - host.docker.internal:host-gateway
 

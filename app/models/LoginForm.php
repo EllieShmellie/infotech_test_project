@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\base\Model;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 class LoginForm extends Model
 {
@@ -14,7 +15,7 @@ class LoginForm extends Model
     {
          return [
              [['phone', 'password'], 'required'],
-             [['phone'], 'string', 'max' => 20],
+             [['phone'], PhoneInputValidator::class, 'region' => ['RU']],
              [['password'], 'string', 'min' => 6],
              [['rememberMe'], 'boolean'],
          ];

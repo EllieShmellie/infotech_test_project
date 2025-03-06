@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use borales\extensions\phoneInput\PhoneInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Subscriber */
@@ -18,7 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?php $form = ActiveForm::begin(); ?>
     
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->widget(PhoneInput::class, [
+            'jsOptions' => [
+                'preferredCountries' => ['ru'],
+            ]
+        ]); 
+    ?>
     
     <div class="form-group">
         <?= Html::submitButton('Подписаться', ['class' => 'btn btn-primary']) ?>

@@ -6,6 +6,7 @@ use yii\db\ActiveRecord;
 use yii\db\ActiveQuery;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\web\UploadedFile;
 
 /**
  * @property int     $book_id
@@ -17,6 +18,7 @@ use yii\db\Expression;
  * @property string  $created_at
  * @property string  $updated_at
  * @property int[]   $authour_ids
+ * @property UploadedFile $cover_file
  * 
  * @property AuthorBook[] $authorBooks
  * @property Author[] $authors
@@ -28,6 +30,11 @@ class Book extends ActiveRecord
      * @var int[]
      */
     public $author_ids = [];
+
+     /**
+     * @var UploadedFile|null Загруженный файл обложки
+     */
+    public $cover_file;
 
     public function behaviors(): array
     {
@@ -61,6 +68,26 @@ class Book extends ActiveRecord
                 'targetClass' => Author::class, 
                 'targetAttribute' => 'author_id'
             ]],
+            [['cover_file'], 'file', 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => true],
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'book_id'     => 'ID Книги', 
+            'year'        => 'год',
+            'title'       => 'Название',
+            'description' => 'Описание',
+            'isbn'        => 'ISBN',
+            'cover'       => 'Обложка',
+            'cover_file'  => 'Обложка',
+            'updated_at'  => 'Обновлена',
+            'created_at'  => 'Создана',
+            'author_ids'  => 'Авторы',
         ];
     }
 
